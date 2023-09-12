@@ -346,7 +346,7 @@ func (s *dumpState) dumpVal(value reflect.Value) {
 
 	// Handle custom dumpers
 	dumperType := reflect.TypeOf((*Dumper)(nil)).Elem()
-	if v.Type().Implements(dumperType) {
+	if v.IsValid() && v.Type().Implements(dumperType) {
 		s.descendIntoPossiblePointer(v, func() {
 			// Run the custom dumper buffering the output
 			buf := new(bytes.Buffer)
